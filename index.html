@@ -17,14 +17,12 @@
   function draw() {
     ctx.clearRect(0, 0, 64, 64);
 
-    // Пульсирующий фон — скругленный квадрат
     var pulse = 0.82 + Math.sin(t * 0.05) * 0.18;
     var glow = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
     glow.addColorStop(0, 'rgba(182,0,168,' + (0.55 + Math.sin(t * 0.07) * 0.2) + ')');
     glow.addColorStop(0.55, 'rgba(118,33,176,' + (0.7 + Math.cos(t * 0.05) * 0.15) + ')');
     glow.addColorStop(1, 'rgba(190,76,0,' + (0.6 + Math.sin(t * 0.09) * 0.2) + ')');
 
-    // Скругленный прямоугольник с анимированным градиентом
     var angle = t * 0.04;
     var cx = 32 + Math.cos(angle) * 18;
     var cy = 32 + Math.sin(angle) * 18;
@@ -37,7 +35,6 @@
     ctx.fillStyle = grad;
     ctx.fill();
 
-    // Внутреннее свечение
     var innerGlow = ctx.createRadialGradient(32, 26, 0, 32, 32, 32);
     innerGlow.addColorStop(0, 'rgba(255,255,255,' + (0.22 + Math.sin(t * 0.06) * 0.1) + ')');
     innerGlow.addColorStop(1, 'rgba(255,255,255,0)');
@@ -45,18 +42,16 @@
     ctx.fillStyle = innerGlow;
     ctx.fill();
 
-    // Тонкая обводка
     roundRect(ctx, 4, 4, 56, 56, 14);
     ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 + Math.sin(t * 0.05) * 0.08) + ')';
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    // Буквы "КТ" (КТ = KT латиницей)
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 26px "Arial Black", Arial, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    // Лёгкое дыхание текста
+    
     var textScale = 0.96 + Math.sin(t * 0.05) * 0.04;
     ctx.save();
     ctx.translate(32, 32);
@@ -219,7 +214,7 @@
   .scroll-hint { position:absolute; left:50%; transform:translateX(-50%); bottom:.5rem; z-index:20;
     font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:#5b646c; }
   @media (max-width:639px){ .scroll-hint{ display:none; } }
-  /* ---------- Mobile optimization ---------- */
+
   @media (max-width:639px){
     .hero { min-height: 100svh; height: auto; padding-bottom: 0; }
     .portrait-wrap, .portrait-wrap.mob { position: static !important; transform: none !important; left: auto; top: auto; bottom: auto; margin: 1.6rem auto .25rem; width: min(258px, 70vw); }
@@ -241,7 +236,7 @@
     .navbar a { font-size: .66rem; }
   }
 
-  /* ---------- Marquee ---------- */
+
   .marquee { background: #0C0C0C; padding: 6rem 0 2.5rem; overflow: hidden; position:relative; z-index:2; }
   @media (min-width:640px){ .marquee{ padding-top:8rem; } }
   @media (min-width:768px){ .marquee{ padding-top:10rem; } }
@@ -250,7 +245,7 @@
   .marquee-tile { width: 420px; height: 270px; flex: 0 0 auto; border-radius: 1rem; overflow: hidden; background:#161616; }
   .marquee-tile img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* ---------- About ---------- */
+ 
   .about { position: relative; padding: 7rem 1.25rem; overflow: hidden; }
   @media (min-width:640px){ .about{ padding:8rem 2rem; } }
   @media (min-width:768px){ .about{ padding:9rem 2.5rem; } }
@@ -284,7 +279,6 @@
   .chip:hover { border-color:#B600A8; color:#fff; }
   .about-cta { margin-top:3rem; }
 
-  /* ---------- Services ---------- */
   .services { background: #FFFFFF; border-top-left-radius: 40px; border-top-right-radius: 40px;
     padding: 5rem 1.25rem; position: relative; z-index: 5; }
   @media (min-width:640px){ .services{ border-top-left-radius:50px; border-top-right-radius:50px; padding:6rem 2rem; } }
@@ -306,7 +300,6 @@
   .service-arrow { align-self:center; font-size:1.6rem; color:#0C0C0C; opacity:0; transform:translateX(-8px); transition:all .3s ease; }
   .service-item:hover .service-arrow { opacity:.85; transform:translateX(0); }
 
-  /* ---------- Projects ---------- */
   .projects { background: #0C0C0C; border-top-left-radius: 40px; border-top-right-radius: 40px;
     margin-top: -2.5rem; position: relative; z-index: 10; padding: 5rem 1.25rem 5rem; overflow:hidden; }
   @media (min-width:640px){ .projects{ border-top-left-radius:50px; border-top-right-radius:50px; margin-top:-3rem; padding:6rem 2rem 6rem; } }
@@ -349,7 +342,6 @@
   .card-domain { color: #7d8a94; font-size: .82rem; letter-spacing: .04em; text-transform: lowercase; transition: color .2s ease; }
   .card-domain:hover { color: #fff; }
 
-  /* ---------- Contact ---------- */
   .contact { background:#0C0C0C; position:relative; overflow:hidden; padding: 6rem 1.5rem 4rem; text-align:center; }
   @media (min-width:768px){ .contact{ padding:8rem 2.5rem 4rem; } }
   .contact .glow.c1 { width:640px; height:640px; background:#B600A8; bottom:-260px; left:50%; transform:translateX(-50%); opacity:.18; }
@@ -383,7 +375,6 @@
 <div id="root">
 <div class="wrapper">
 
-  <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="glow g1"></div><div class="glow g2"></div>
     <nav class="navbar fade-in" data-y="-20" data-delay="0">
@@ -426,13 +417,11 @@
     <div class="scroll-hint">Scroll ↓</div>
   </section>
 
-  <!-- ================= MARQUEE ================= -->
   <section class="marquee" id="marquee">
     <div class="marquee-row" id="row1"></div>
     <div class="marquee-row" id="row2"></div>
   </section>
 
-  <!-- ================= ABOUT ================= -->
   <section class="about" id="about">
     <div class="glow a1"></div><div class="glow a2"></div>
     <div class="about-deco deco-tl fade-in" data-x="-80" data-delay="0.1" data-dur="0.9"><img src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png" alt="" loading="lazy" /></div>
@@ -468,7 +457,6 @@
     </div>
   </section>
 
-  <!-- ================= SERVICES ================= -->
   <section class="services" id="services">
     <div class="services-head">
       <span class="eyebrow dark fade-in" data-y="20">(02) Чем помогаю</span>
@@ -478,7 +466,6 @@
     <div class="services-list" id="servicesList"></div>
   </section>
 
-  <!-- ================= PROJECTS ================= -->
   <section class="projects" id="projects">
     <div class="glow p1"></div>
     <div class="projects-head">
@@ -488,7 +475,6 @@
     <div class="cards-wrap" id="cardsWrap"></div>
   </section>
 
-  <!-- ================= CONTACT ================= -->
   <section class="contact" id="contact">
     <div class="glow c1"></div>
     <div class="contact-inner">
