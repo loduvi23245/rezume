@@ -4,6 +4,90 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Кирилл Тушканов — Разработчик</title>
+<script>
+(function(){
+  var canvas = document.createElement('canvas');
+  canvas.width = 64; canvas.height = 64;
+  var ctx = canvas.getContext('2d');
+  var link = document.createElement('link');
+  link.rel = 'icon'; link.type = 'image/png';
+  document.head.appendChild(link);
+
+  var t = 0;
+  function draw() {
+    ctx.clearRect(0, 0, 64, 64);
+
+    // Пульсирующий фон — скругленный квадрат
+    var pulse = 0.82 + Math.sin(t * 0.05) * 0.18;
+    var glow = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    glow.addColorStop(0, 'rgba(182,0,168,' + (0.55 + Math.sin(t * 0.07) * 0.2) + ')');
+    glow.addColorStop(0.55, 'rgba(118,33,176,' + (0.7 + Math.cos(t * 0.05) * 0.15) + ')');
+    glow.addColorStop(1, 'rgba(190,76,0,' + (0.6 + Math.sin(t * 0.09) * 0.2) + ')');
+
+    // Скругленный прямоугольник с анимированным градиентом
+    var angle = t * 0.04;
+    var cx = 32 + Math.cos(angle) * 18;
+    var cy = 32 + Math.sin(angle) * 18;
+    var grad = ctx.createLinearGradient(cx - 28, cy - 28, cx + 28, cy + 28);
+    grad.addColorStop(0, '#B600A8');
+    grad.addColorStop(0.45, '#7621B0');
+    grad.addColorStop(1, '#BE4C00');
+
+    roundRect(ctx, 4, 4, 56, 56, 14);
+    ctx.fillStyle = grad;
+    ctx.fill();
+
+    // Внутреннее свечение
+    var innerGlow = ctx.createRadialGradient(32, 26, 0, 32, 32, 32);
+    innerGlow.addColorStop(0, 'rgba(255,255,255,' + (0.22 + Math.sin(t * 0.06) * 0.1) + ')');
+    innerGlow.addColorStop(1, 'rgba(255,255,255,0)');
+    roundRect(ctx, 4, 4, 56, 56, 14);
+    ctx.fillStyle = innerGlow;
+    ctx.fill();
+
+    // Тонкая обводка
+    roundRect(ctx, 4, 4, 56, 56, 14);
+    ctx.strokeStyle = 'rgba(255,255,255,' + (0.18 + Math.sin(t * 0.05) * 0.08) + ')';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Буквы "КТ" (КТ = KT латиницей)
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 26px "Arial Black", Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    // Лёгкое дыхание текста
+    var textScale = 0.96 + Math.sin(t * 0.05) * 0.04;
+    ctx.save();
+    ctx.translate(32, 32);
+    ctx.scale(textScale, textScale);
+    ctx.shadowColor = 'rgba(255,255,255,0.5)';
+    ctx.shadowBlur = 4 + Math.sin(t * 0.07) * 3;
+    ctx.fillText('KT', 0, 1);
+    ctx.restore();
+
+    link.href = canvas.toDataURL('image/png');
+    t++;
+    requestAnimationFrame(draw);
+  }
+
+  function roundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+  }
+
+  draw();
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
